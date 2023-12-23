@@ -1,21 +1,21 @@
-package objectsorter.structure.temp;
+package objectsorter.structure.temp.comparator.eightysix;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import objectsorter.structure.temp.comparator.ElementComparator;
+import objectsorter.structure.ElementObject;
+import objectsorter.structure.temp.Element;
 
-public class ElementList<E extends Element> implements Serializable{
+public class ElementList<E extends Element> extends ElementObject{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8018839762578996351L;
+	/*private static final long serialVersionUID = -8018839762578996351L;
 	public static final int DUPLICATE = 0, UNIQUEFINAL = 1, UNIQUEOVERRIDE = 3, 
-			DUPLICATEMOD = 0, UNIQUEMOD = 1;
+			DUPLICATEMODULO = 0, UNIQUEMODULO = 1;
 	private int listType;
-	private ArrayList<E> elementArrayList;
+	private ArrayList<E> elementArrayList; // super.getElementList
 	private ElementComparator comparator;
 	
 	public ElementList() {
@@ -66,7 +66,7 @@ public class ElementList<E extends Element> implements Serializable{
 			elementArrayList.add((-(index) - 1),element);
 			return true;
 		}
-		if(listType%2==UNIQUEMOD) {
+		if(listType%2==UNIQUEMODULO) {
 			if(listType==UNIQUEOVERRIDE) {
 				elementArrayList.remove(index);
 				elementArrayList.add(index,element);
@@ -118,7 +118,7 @@ public class ElementList<E extends Element> implements Serializable{
 	
 	public int size() {
 		return elementArrayList.size();
-	}
+	}*/
 	
 	//Add
 	//Contains

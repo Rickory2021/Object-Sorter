@@ -1,43 +1,43 @@
 package objectsorter.structure.temp;
 
-import java.io.Serializable;
-
-public class ElementComponent <T> extends Element implements Serializable{
+public class ElementComponent <T> extends Element{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7259610508388342031L;
-	private T componentInfo;
+	private T elementInfo;
 	
 	public ElementComponent() {
 		super();
 	}
 	
-	public ElementComponent(T componentInfo) {
+	public ElementComponent(T elementInfo) {
 		super();
-		this.componentInfo=componentInfo;
+		this.elementInfo=elementInfo;
 	}
 	
-	public ElementComponent(String elementName, T componentInfo) {
+	public ElementComponent(String elementName, T elementInfo) {
 		super(elementName);
-		this.componentInfo = componentInfo;
+		this.elementInfo = elementInfo;
 	}
 
-	public T getComponentInfo() {
-		return componentInfo;
+	public T getElementComponent() {
+		return elementInfo;
 	}
 
-	public void setComponentInfo(T componentInfo) {
+	public void setComponentInfo(T elementInfo) {
 		super.updateTime();
-		this.componentInfo = componentInfo;
+		this.elementInfo = elementInfo;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Component: "+super.toString());
-		stringBuilder.append("Info: "+componentInfo+"\n");
+		stringBuilder.append("ElementComponent Name: "+super.toString());
+		stringBuilder.append("Info: "+elementInfo+"\n");
+		
 		return stringBuilder.toString();
 	}
+
 }

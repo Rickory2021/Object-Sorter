@@ -1,4 +1,4 @@
-package objectsorter.structure.temp;
+package objectsorter.structure.temp.comparator.eightysix;
 
 public class ElementListName {
 	/* Integer

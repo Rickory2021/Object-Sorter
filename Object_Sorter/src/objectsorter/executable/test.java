@@ -326,6 +326,7 @@ public class test {
 		File dailySalesDirectoryPath = new File(dailySalesDirectoryString);
 		File clockInDirectoryPath = new File(clockInDirectoryString);
 		
+		
 		String dailySalesFileNameArr[] = dailySalesDirectoryPath.list();
 		String clockInFileNameArr[] = clockInDirectoryPath.list();
 		for(String arr:clockInFileNameArr) {
@@ -474,6 +475,7 @@ public class test {
 						int currentMinutes = (int)employee.getComponent("Hours Minutes").getcomponentInfo().getInfo();
 						int newMinutes = (int)shift.getComponent("Total Minutes").getcomponentInfo().getInfo();
 						employee.getComponent("Hours Minutes").setcomponentInfo(new ElementComponentInfo<Integer>(newMinutes+currentMinutes));
+						employee.getComponent("Hours").setcomponentInfo(new ElementComponentInfo<Double>((newMinutes+currentMinutes)/60.0));
 					}
 				}
 			}
@@ -500,7 +502,7 @@ public class test {
 				//System.out.println("Origin Tip: "+ tip + "\tSplit by: "+activeEmployee.size());
 				//System.out.println("ORDER TIME: "+minuteTime);
 				for(ElementObject emp: activeEmployee) {
-					System.out.println(emp);
+					//System.out.println(emp);
 				}
 				tip/=activeEmployee.size();
 				for(ElementObject employee:activeEmployee) {
