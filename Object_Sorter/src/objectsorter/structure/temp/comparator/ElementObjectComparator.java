@@ -1,13 +1,17 @@
 package objectsorter.structure.temp.comparator;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import objectsorter.structure.temp.Element;
+import objectsorter.structure.temp.ElementComponent;
+import objectsorter.structure.temp.ElementComponentList;
 import objectsorter.structure.temp.ElementObject;
 import objectsorter.structure.temp.comparator.ElementEnum.ElementObjectCompareType;
 import objectsorter.structure.temp.comparator.ElementEnum.ElementObjectInternalListSearchType;
-import objectsorter.structure.temp.comparator.ElementEnum.ElementObjectListType;
+import objectsorter.structure.temp.comparator.ElementEnum.ElementComponentListType;
 import objectsorter.structure.temp.comparator.ElementEnum.OrderType;
 
 public class ElementObjectComparator <T extends ElementObject> extends Element implements Comparator<T>{
@@ -21,7 +25,7 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 	private ArrayList<T> usedList;
 	
 	// Used when Internal Search
-	private ElementObjectListType listType;
+	private ElementComponentListType listType;
 	private String nameSearch;
 	// Used when asking for Custom Comparator
 	private ElementObjectInternalListSearchType internalCompareType;
@@ -32,7 +36,7 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 		this.orderType=OrderType.ASCENDING;
 		this.usedList=new ArrayList<>();
 		
-		this.listType=ElementObjectListType.UNKNOWN;
+		this.listType=ElementComponentListType.UNKNOWN;
 		this.nameSearch=null;
 		this.internalCompareType=ElementObjectInternalListSearchType.NULL;
 	}
@@ -43,7 +47,7 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 		this.orderType=OrderType.ASCENDING;
 		this.usedList=new ArrayList<>();
 		
-		this.listType=ElementObjectListType.UNKNOWN;
+		this.listType=ElementComponentListType.UNKNOWN;
 		this.nameSearch=null;
 		this.internalCompareType=ElementObjectInternalListSearchType.NULL;
 	}
@@ -54,12 +58,12 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 		this.orderType=orderType;
 		this.usedList=new ArrayList<>();
 		
-		this.listType=ElementObjectListType.UNKNOWN;
+		this.listType=ElementComponentListType.UNKNOWN;
 		this.nameSearch=null;
 		this.internalCompareType=ElementObjectInternalListSearchType.NULL;
 	}
 	
-	public ElementObjectComparator(ElementObjectCompareType compareType, OrderType orderType, ElementObjectListType infoListType, String infoName) {
+	public ElementObjectComparator(ElementObjectCompareType compareType, OrderType orderType, ElementComponentListType infoListType, String infoName) {
 		super();
 		this.compareType=compareType;
 		this.orderType=orderType;
@@ -70,7 +74,7 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 		this.internalCompareType=ElementObjectInternalListSearchType.NULL;
 	}
 	
-	public ElementObjectComparator(ElementObjectCompareType compareType, OrderType orderType, ElementObjectListType infoListType, String infoName, ElementObjectInternalListSearchType internalCompareType) {
+	public ElementObjectComparator(ElementObjectCompareType compareType, OrderType orderType, ElementComponentListType infoListType, String infoName, ElementObjectInternalListSearchType internalCompareType) {
 		super();
 		this.compareType=compareType;
 		this.orderType=orderType;
@@ -128,8 +132,55 @@ public class ElementObjectComparator <T extends ElementObject> extends Element i
 	}
 	
 	@Override
-	public int compare(T o1, T o2) {
-		// TODO Auto-generated method stub
+	public int compare(T elementObject1, T elementObject2) {
+		try {
+			return ElementEnum.compare(elementObject1,elementObject2,compareType,orderType);
+		}catch(Exception e){}
+		if(compareType.equals(ElementObjectCompareType.INTERNAL_INFO)) {
+			if(listType.equals(ElementComponentListType.INTEGER)) {
+				ElementComponentList<Integer> 
+					componentList1 = elementObject1.getIntegerList(), 
+					componentList2 = elementObject2.getIntegerList(); 
+				if(nameSearch==null) {
+					System.out.println("CANNOT GO INTERNAL WITHOUT A NAME");
+					return 0;
+				}else {
+					ArrayList<ElementComponent<Integer>> 
+						componentListNamed1 = componentList1.getElementObjectNamedList(nameSearch),
+						componentListNamed2 = componentList2.getElementObjectNamedList(nameSearch);
+					if(internalCompareType.equals(ElementObjectInternalListSearchType.DEFAULT_COMPARATOR_FIRST)) {
+						ElementComponent<Integer> 
+							component1 = componentListNamed1.get(0),
+							component2 = componentListNamed2.get(0);
+						if(componentList1.getActiveComponentComparator()==null) 
+							return component1.getElementComponent().compareTo(component2.getElementComponent());
+						return componentList1.getActiveComponentComparator().compare(component1, component2);
+					}else if(internalCompareType.equals(ElementObjectInternalListSearchType.DEFAULT_COMPARATOR_LAST)) {
+						ElementComponent<Integer> 
+							component1 = componentListNamed1.get(componentListNamed1.size()-1),
+							component2 = componentListNamed2.get(componentListNamed2.size()-1);
+						if(componentList1.getActiveComponentComparator()==null) return component1.getElementComponent().compareTo(component2.getElementComponent())*-1;
+						return componentList1.getActiveComponentComparator().compare(component1, component2)*-1;
+					}
+				}
+			}else if(listType.equals(ElementComponentListType.DOUBLE)) {
+				ElementComponentList<Double> componentList1, componentList2; 
+					componentList1 = elementObject1.getDoubleList();
+					componentList2 = elementObject2.getDoubleList();
+				System.out.println("NOTE: DOUBLE LIST TYPE HAS NOT BEEN SET UP");
+				System.out.println("From ElementObjectComparator");
+			}else if(listType.equals(ElementComponentListType.STRING)) {
+				ElementComponentList<String> componentList1, componentList2; 
+					componentList1 = elementObject1.getStringList();
+					componentList2 = elementObject2.getStringList();
+				System.out.println("NOTE: STRING LIST TYPE HAS NOT BEEN SET UP");
+				System.out.println("From ElementObjectComparator");
+			}else if(listType.equals(ElementComponentListType.UNKNOWN)) {
+				System.out.println("CANNOT COMPARE UNKNOWN COMPONENTLIST");
+				return 0;
+			}
+			
+		}
 		return 0;
 	}
 

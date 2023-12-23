@@ -21,12 +21,13 @@ public class ElementComponentList <E> extends Element{
 		super();
 		this.structType = ElementEnum.StructureType.DUPLICATE;
 		this.elementList = new ArrayList<ElementComponent<E>>();
-		//this.activeComponentComparator=new ElementComparator();
+		this.activeComponentComparator=new ElementComponentComparator<ElementComponent<E>>();
 	}
 	
 	public ElementComponentList(String elementName) {
 		super(elementName);
 		this.elementList=new ArrayList<ElementComponent<E>>();
+		this.activeComponentComparator=new ElementComponentComparator<ElementComponent<E>>();
 	}
 	
 	public ElementEnum.StructureType getStructType() {
@@ -166,6 +167,28 @@ public class ElementComponentList <E> extends Element{
 		return false;
 	}
 	
+	public int indexOfNamed(String name) {
+		for(int i = 0; i<elementList.size();i++) {
+			if(elementList.get(i).getElementName().equals(name))return i;
+		}
+		return -1;
+	}
+	
+	public ElementComponent<E> getElementObjectNamed(String name){
+		for(ElementComponent<E> component: elementList) {
+			if(component.getElementName().equals(name))return component;
+		}
+		return null;
+	}
+	
+	public ArrayList<ElementComponent<E>> getElementObjectNamedList(String name){
+		ArrayList<ElementComponent<E>> tempArrayList = new ArrayList<ElementComponent<E>>();
+		for(ElementComponent<E> component: elementList) {
+			if(component.getElementName().equals(name))tempArrayList.add(component);
+		}
+		return tempArrayList;
+		
+	}
 	
 	//Add
 	//Contains

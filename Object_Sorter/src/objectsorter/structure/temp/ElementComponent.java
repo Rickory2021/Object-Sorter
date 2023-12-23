@@ -29,7 +29,7 @@ public class ElementComponent <T> extends Element{
 	public void setComponentInfo(T elementInfo) {
 		super.updateTime();
 		this.elementInfo = elementInfo;
-	}
+	}	
 	
 	@Override
 	public String toString() {

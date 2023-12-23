@@ -68,9 +68,9 @@ public class ElementEnum {
 	public enum ElementObjectInternalListSearchType implements CompareType{
 		NULL("NULL"),
 		DEFAULT_COMPARATOR_FIRST("DEFAULT_COMPARATOR_FIRST"),
-		DEFAULT_COMPARATOR_LAST("DEFAULT_COMPARATOR_LAST"),
-		CUSTOM_COMPARATOR_FIRST("CUSTOM_COMPARATOR_FIRST"),
-		CUSTOM_COMPARATOR_LAST("CUSTOM_COMPARATOR_LAST");
+		DEFAULT_COMPARATOR_LAST("DEFAULT_COMPARATOR_LAST");
+		//CUSTOM_COMPARATOR_FIRST("CUSTOM_COMPARATOR_FIRST"),
+		//CUSTOM_COMPARATOR_LAST("CUSTOM_COMPARATOR_LAST");
 
 		private String stringRepresentation;
 		
@@ -84,7 +84,7 @@ public class ElementEnum {
 		}
 	}
 	
-	public enum ElementObjectListType{
+	public enum ElementComponentListType{
 		INTEGER("INTEGER"),
 		DOUBLE("DOUBLE"),
 		STRING("STRING"),
@@ -92,7 +92,7 @@ public class ElementEnum {
 
 		private String stringRepresentation;
 		
-		ElementObjectListType(String stringRepresentation) {
+		ElementComponentListType(String stringRepresentation) {
 			// TODO Auto-generated constructor stub
 			this.stringRepresentation=stringRepresentation;
 		}

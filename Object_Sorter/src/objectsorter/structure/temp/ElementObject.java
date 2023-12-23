@@ -1,5 +1,4 @@
 package objectsorter.structure.temp;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -23,16 +22,99 @@ public class ElementObject extends Element{
 	private ElementComponentList<String> stringList;
 	private ElementComponentList<?> unknownList;
 	
+	public ElementObject() {
+		super();
+		this.structType = ElementEnum.StructureType.DUPLICATE;
+		this.objectList = new ArrayList<ElementObject>();
+		this.activeObjectComparator=new ElementObjectComparator<ElementObject>();
+		
+		this.integerList = new ElementComponentList<Integer>();
+		this.doubleList = new ElementComponentList<Double>();
+		this.stringList = new ElementComponentList<String>();
+		this.unknownList = new ElementComponentList<>();
+	}
+	
+	public ElementObject(String elementName) {
+		super(elementName);
+		this.objectList=new ArrayList<ElementObject>();
+		this.activeObjectComparator=new ElementObjectComparator<ElementObject>();
+		
+		this.integerList = new ElementComponentList<Integer>();
+		this.doubleList = new ElementComponentList<Double>();
+		this.stringList = new ElementComponentList<String>();
+		this.unknownList = new ElementComponentList<>();
+	}
+	
+	public ElementEnum.StructureType getStructType() {
+		return structType;
+	}
+
+	public void setStructType(ElementEnum.StructureType structType) {
+		this.structType = structType;
+	}
+	
 	public ElementObjectComparator<ElementObject> getActiveComponentComparator() {
 		return activeObjectComparator;
 	}
-	
+
+	public ArrayList<ElementObject> getObjectList() {
+		return objectList;
+	}
+
+	public void setObjectList(ArrayList<ElementObject> objectList, boolean updateList) {
+		this.objectList = objectList;
+		if(updateList && activeObjectComparator != null) {
+			Collections.sort(this.objectList, activeObjectComparator);
+		}
+		super.updateTime();
+	}
 	
 	public void updateList() {
 		if(activeObjectComparator != null) {
 			Collections.sort(this.objectList, activeObjectComparator);
 			super.updateTime();
 		}
-		
+	}
+
+	public ElementObjectComparator<ElementObject> getActiveObjectComparator() {
+		return activeObjectComparator;
+	}
+
+	public void setActiveObjectComparator(ElementObjectComparator<ElementObject> activeObjectComparator) {
+		this.activeObjectComparator = activeObjectComparator;
+	}
+
+	public ElementComponentList<Integer> getIntegerList() {
+		return integerList;
+	}
+
+	public void setIntegerList(ElementComponentList<Integer> integerList) {
+		this.integerList = integerList;
+	}
+
+	public ElementComponentList<Double> getDoubleList() {
+		return doubleList;
+	}
+
+	public void setDoubleList(ElementComponentList<Double> doubleList) {
+		this.doubleList = doubleList;
+	}
+
+	public ElementComponentList<String> getStringList() {
+		return stringList;
+	}
+
+	public void setStringList(ElementComponentList<String> stringList) {
+		this.stringList = stringList;
+	}
+
+
+	public ElementComponentList<?> getUnknownList() {
+		return unknownList;
+	}
+
+
+	public void setUnknownList(ElementComponentList<?> unknownList) {
+		this.unknownList = unknownList;
 	}
 }
