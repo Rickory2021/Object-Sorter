@@ -6,9 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import objectsorter.structure.temp.*;
+import objectsorter.structure.temp.ElementEnum.ElementObjectCompareType;
 import objectsorter.structure.temp.comparator.*;
-//import objectsorter.structure.temp.comparator.ElementEnum.ElementCompareType;
-import objectsorter.structure.temp.comparator.ElementEnum.ElementObjectCompareType;
 
 
 public class refractorTest {
@@ -60,13 +59,13 @@ public class refractorTest {
 		tree.addData("S&S",node3);
 		System.out.println("TREE PRINT");
 		System.out.println(tree);
-		System.out.println(tree.getElementList().get(0).getElementComponent().getElementList().get(0).getElementComponent().getClass());
+		System.out.println(tree.getElementList().get(0).getElementInfo().getElementList().get(0).getElementInfo().getClass());
 		ElementComponentComparator<ElementComponent<Integer>> infoComparator = 
 				new ElementComponentComparator<ElementComponent<Integer>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
 		
-		ElementComponentList<?> tranverseNode1 = tree.getElementList().get(0).getElementComponent();
-		ElementComponentList<?> tranverseNode2 = tree.getElementList().get(1).getElementComponent();
-		ElementComponentList<?> tranverseNode3 = tree.getElementList().get(2).getElementComponent();
+		ElementComponentList<?> tranverseNode1 = tree.getElementList().get(0).getElementInfo();
+		ElementComponentList<?> tranverseNode2 = tree.getElementList().get(1).getElementInfo();
+		ElementComponentList<?> tranverseNode3 = tree.getElementList().get(2).getElementInfo();
 		System.out.println(node1.getElementName());
 		System.out.println(node2.getElementName());
 		//System.out.println(objComparator.compare(node1, node2));

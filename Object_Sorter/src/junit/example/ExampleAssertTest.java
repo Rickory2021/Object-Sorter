@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class ExampleAssertTest{
+class ExampleAssertTest{
 
 	@Test
 	public void testAssertArrayEquals() {

@@ -1,9 +1,9 @@
 package objectsorter.structure.temp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import objectsorter.structure.temp.comparator.ElementEnum;
 import objectsorter.structure.temp.comparator.ElementComponentComparator;
 
 public class ElementComponentList <E> extends Element{
@@ -28,6 +28,13 @@ public class ElementComponentList <E> extends Element{
 		super(elementName);
 		this.elementList=new ArrayList<ElementComponent<E>>();
 		this.activeComponentComparator=new ElementComponentComparator<ElementComponent<E>>();
+	}
+	
+	public ElementComponentList(String elementName, ElementComponentComparator<ElementComponent<E>> activeComponentComparator) {
+		super(elementName);
+		this.structType = ElementEnum.StructureType.DUPLICATE;
+		this.elementList = new ArrayList<ElementComponent<E>>();
+		setActiveComponentComparator(activeComponentComparator,false);
 	}
 	
 	public ElementEnum.StructureType getStructType() {
@@ -241,7 +248,19 @@ public class ElementComponentList <E> extends Element{
 		return stringBuilder.toString();
 	}
 
-	
+	@Override
+	public String toStringExtensive() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("ElementComponent Name: "+super.toString());
+		stringBuilder.append("Structure Type: "+ structType.toString());
+		stringBuilder.append("Active Comparator: " + activeComponentComparator);
+		stringBuilder.append("List:\n");
+		for(int i = 0; i<elementList.size();i++) {
+			//stringBuilder.append("\t"+elementList.get(i)+"\n");
+			stringBuilder.append(elementList.get(i)+"\n");
+		}
+		return stringBuilder.toString();
+	}
 
 	
 }

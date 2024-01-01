@@ -2,7 +2,6 @@ package objectsorter.structure.temp;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import objectsorter.structure.temp.comparator.ElementEnum;
 import objectsorter.structure.temp.comparator.ElementObjectComparator;
 
 public class ElementObject extends Element{
@@ -20,7 +19,7 @@ public class ElementObject extends Element{
 	private ElementComponentList<Integer> integerList;
 	private ElementComponentList<Double> doubleList;
 	private ElementComponentList<String> stringList;
-	private ElementComponentList<?> unknownList;
+	private ElementComponentList<Object> unknownList;
 	
 	public ElementObject() {
 		super();
@@ -109,12 +108,17 @@ public class ElementObject extends Element{
 	}
 
 
-	public ElementComponentList<?> getUnknownList() {
+	public ElementComponentList<Object> getUnknownList() {
 		return unknownList;
 	}
 
 
-	public void setUnknownList(ElementComponentList<?> unknownList) {
+	public void setUnknownList(ElementComponentList<Object> unknownList) {
 		this.unknownList = unknownList;
+	}
+	
+	@Override
+	public String toStringExtensive() {
+		return null;
 	}
 }

@@ -8,8 +8,9 @@ import java.util.Comparator;
 import objectsorter.structure.temp.Element;
 import objectsorter.structure.temp.ElementComponent;
 import objectsorter.structure.temp.ElementComponentList;
-import objectsorter.structure.temp.comparator.ElementEnum.ElementComponentCompareType;
-import objectsorter.structure.temp.comparator.ElementEnum.OrderType;
+import objectsorter.structure.temp.ElementEnum;
+import objectsorter.structure.temp.ElementEnum.ElementComponentCompareType;
+import objectsorter.structure.temp.ElementEnum.OrderType;
 
 public class ElementComponentComparator <T extends ElementComponent<?>> extends Element implements Comparator<T>{
 	/**
@@ -62,6 +63,7 @@ public class ElementComponentComparator <T extends ElementComponent<?>> extends 
 		this.compareType = compareType;
 		for(ElementComponentList<?> ElementComponentList:usedList) {
 			ElementComponentList.updateList();
+			//System.out.println("UPDATED??");
 		}
 		super.updateTime();
 	}
@@ -93,6 +95,7 @@ public class ElementComponentComparator <T extends ElementComponent<?>> extends 
 	}
 	
 	public static <E> void addPointerToElementComponentList(ElementComponentList<E> elementComponentList, ElementComponentComparator<ElementComponent<E>> elementInfoComparator) {
+		if(elementInfoComparator==null) return;
 		if(elementInfoComparator.getUsedList().indexOf(elementComponentList)==-1) {
 			elementInfoComparator.getUsedList().add(elementComponentList);
 			elementInfoComparator.updateTime();
@@ -102,38 +105,48 @@ public class ElementComponentComparator <T extends ElementComponent<?>> extends 
 	public static <E> void swapPointerFromElementComponentList(ElementComponentList<E> ElementComponentList, ElementComponentComparator<ElementComponent<E>> newElementComponentComparator) {
 		removePointerFromElementComponentList(ElementComponentList, ElementComponentList.getActiveComponentComparator());
 		addPointerToElementComponentList(ElementComponentList,newElementComponentComparator);
+		ElementComponentList.updateList();
 	}
 	
 	@Override
 	public int compare(T elementInfo1, T elementInfo2) {
+		if(elementInfo1==null && elementInfo2!=null)return 1;
+		if(elementInfo1==null && elementInfo2==null)return 0;
+		if(elementInfo1!=null && elementInfo2==null)return -1;
+		if(elementInfo1.getElementInfo()==null && elementInfo2.getElementInfo()!=null)return 1;
+		if(elementInfo1.getElementInfo()==null && elementInfo2.getElementInfo()==null)return 0;
+		if(elementInfo1.getElementInfo()!=null && elementInfo2.getElementInfo()==null)return -1;
 		try {
-			return ElementEnum.compare(elementInfo1,elementInfo2,compareType,orderType);
+			return ElementComparator.compare(elementInfo1,elementInfo2,compareType,orderType);
 		}catch(Exception e){}
 		if(compareType.equals(ElementComponentCompareType.INFO_COMPARISION)) {
-			if (elementInfo1.getElementComponent() instanceof Comparable && elementInfo2.getElementComponent() instanceof Comparable) {
+			if (elementInfo1.getElementInfo().getClass().getName().equals(elementInfo2.getElementInfo().getClass().getName()) && elementInfo1.getElementInfo() instanceof Comparable && elementInfo2.getElementInfo() instanceof Comparable) {
+				//System.out.println(elementInfo1.getClass().getName());
+				//System.out.println(elementInfo2.getClass().getName());
 				Method compareToMethod;
 				try {
 					compareToMethod = Comparable.class.getMethod("compareTo", Object.class);
-					return (Integer) compareToMethod.invoke(elementInfo1.getElementComponent(), elementInfo2.getElementComponent())*orderType.getIntegerRepresentation();
+					return (Integer) compareToMethod.invoke(elementInfo1.getElementInfo(), elementInfo2.getElementInfo())*orderType.getIntegerRepresentation();
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					e.printStackTrace();
 				}
 			}else{
-		    	   System.out.println("Can't Compare");
+				return elementInfo1.getElementInfo().getClass().getName().compareTo(elementInfo2.getElementInfo().getClass().getName());
 		    }
 		}
 		return 0;
 	}
 	
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		System.out.println(this.getElementName()+" == "+((ElementComponent<?>) obj).getElementName());
 		if(obj instanceof ElementComponent<?>) {
 			return this.getElementName().equals(((ElementComponent<?>) obj).getElementName());
 		}
+		
 		return this==obj;
 		
-	}
+	}*/
 	
 	@Override
 	public String toString() {
