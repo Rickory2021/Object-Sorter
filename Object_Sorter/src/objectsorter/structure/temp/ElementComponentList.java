@@ -1,17 +1,17 @@
 package objectsorter.structure.temp;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import objectsorter.structure.temp.comparator.ElementComponentComparator;
 
 public class ElementComponentList <E> extends Element{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8178598806525382815L;
-	private ElementEnum.StructureType structType;
+	private ListStructure structType;
 	private ArrayList<ElementComponent<E>> elementList;
 	// NOTE THIS IS FILLER (CHANGE CLASS LATER)
 	private ElementComponentComparator<ElementComponent<E>> activeComponentComparator;
@@ -19,7 +19,7 @@ public class ElementComponentList <E> extends Element{
 	
 	public ElementComponentList() {
 		super();
-		this.structType = ElementEnum.StructureType.DUPLICATE;
+		this.structType = ListStructure.DUPLICATE;
 		this.elementList = new ArrayList<ElementComponent<E>>();
 		this.activeComponentComparator=new ElementComponentComparator<ElementComponent<E>>();
 	}
@@ -32,16 +32,16 @@ public class ElementComponentList <E> extends Element{
 	
 	public ElementComponentList(String elementName, ElementComponentComparator<ElementComponent<E>> activeComponentComparator) {
 		super(elementName);
-		this.structType = ElementEnum.StructureType.DUPLICATE;
+		this.structType = ListStructure.DUPLICATE;
 		this.elementList = new ArrayList<ElementComponent<E>>();
 		setActiveComponentComparator(activeComponentComparator,false);
 	}
 	
-	public ElementEnum.StructureType getStructType() {
+	public ListStructure getListStructure() {
 		return structType;
 	}
 	
-	public void setStructType(ElementEnum.StructureType structType) {
+	public void setListStructure(ListStructure structType) {
 		this.structType=structType;
 	}
 

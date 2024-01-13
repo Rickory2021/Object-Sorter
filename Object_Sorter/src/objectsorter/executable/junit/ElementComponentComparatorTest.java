@@ -15,9 +15,9 @@ import org.junit.runners.MethodSorters;
 import objectsorter.structure.temp.Element;
 import objectsorter.structure.temp.ElementComponent;
 import objectsorter.structure.temp.ElementComponentList;
-import objectsorter.structure.temp.ElementEnum.ElementComponentCompareType;
-import objectsorter.structure.temp.ElementEnum.OrderType;
 import objectsorter.structure.temp.comparator.ElementComponentComparator;
+import objectsorter.structure.temp.comparator.comparerule.CompareRule.OrderType;
+import objectsorter.structure.temp.comparator.comparerule.ElementComponentCompareRule.ElementComponentCompareType;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ElementComponentComparatorTest {
@@ -30,27 +30,6 @@ class ElementComponentComparatorTest {
 	// Debug Test
 	//public int GENERATION_COUNT_PER = 5, NAME_MIN_LEN = 1, NAME_MAX_LEN=10;
 
-	// Helper Methods
-	String generateRandomString(int minLength, int maxLength) {
-		int strLen = (int)(Math.random()*(maxLength-minLength)+minLength);
-		StringBuilder stringBuilder = new StringBuilder();
-		for(int i = 0; i<strLen;i++) {
-			char generatedChar = (char)(Math.random()*94+33);
-			stringBuilder.append(generatedChar);
-		}
-		return stringBuilder.toString();
-	}
-
-
-	void printArrayListConcurrently(ArrayList<?> arrayList1, ArrayList<?> arrayList2) {
-		for(int i = 0;i<arrayList1.size();i++) {
-			System.out.println("FROM ArrayList1: \n"
-					+arrayList1.get(i)+"\n"
-					+"FROM ArrayList2: \n"
-					+arrayList2.get(i));
-		}
-	}
-
 	int getRandomIndex(ArrayList<?> arrayList) {
 		return (int)(Math.random()*arrayList.size());
 	}
@@ -62,22 +41,22 @@ class ElementComponentComparatorTest {
 		case 0:
 			// Generate Int
 			int generatedInteger = (int)(Math.random()*10_000_000);
-			generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			return new ElementComponent<>(generatedString,generatedInteger);
 		case 1:
 			// Generate Double
 			double generatedDouble = Math.random()*10_000_000;
-			generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			return new ElementComponent<>(generatedString,generatedDouble);
 		case 2:
 			// Generate String
-			String generatedStringInfo = generateRandomString(50,50);
-			String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedStringInfo = JUnitHelper.generateRandomString(50,50);
+			String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			return new ElementComponent<>(generatedStringName,generatedStringInfo);
 		case 3:
 			// Generate ArrayList
 			ArrayList<?> generatedArrayList = new ArrayList<>();
-			generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			return new ElementComponent<>(generatedString,generatedArrayList);
 		}
 		return null;
@@ -171,7 +150,7 @@ class ElementComponentComparatorTest {
 		// Get Integer
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			int generatedInteger = (int)(Math.random()*10_000_000);
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedNames.add(generatedString);
 			elementComponentList.add(new ElementComponent<Integer>(generatedString,generatedInteger));
 		}
@@ -179,7 +158,7 @@ class ElementComponentComparatorTest {
 		// Get Double
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			double generatedDouble = Math.random()*10_000_000;
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedNames.add(generatedString);
 			elementComponentList.add(new ElementComponent<Double>(generatedString,generatedDouble));
 		}
@@ -187,7 +166,7 @@ class ElementComponentComparatorTest {
 		// Get String
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			String generatedStringInfo = "String Info";
-			String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedNames.add(generatedStringName);
 			elementComponentList.add(new ElementComponent<String>(generatedStringName,generatedStringInfo));
 		}
@@ -230,7 +209,7 @@ class ElementComponentComparatorTest {
 		// Get Integer
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			int generatedInteger = (int)(Math.random()*10_000_000);
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			ElementComponent<Integer> elementComponent = new ElementComponent<Integer>(generatedString,generatedInteger); 
 			generatedComponents.add(elementComponent);
 			elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -240,7 +219,7 @@ class ElementComponentComparatorTest {
 		// Get Double
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			double generatedDouble = Math.random()*10_000_000;
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			ElementComponent<Double> elementComponent = new ElementComponent<Double>(generatedString,generatedDouble); 
 			generatedComponents.add(elementComponent);
 			elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -250,7 +229,7 @@ class ElementComponentComparatorTest {
 		// Get String
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			String generatedStringInfo = "String Info";
-			String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			ElementComponent<String> elementComponent = new ElementComponent<String>(generatedStringName,generatedStringInfo); 
 			generatedComponents.add(elementComponent);
 			elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -293,7 +272,7 @@ class ElementComponentComparatorTest {
 			// Get Integer
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				int generatedInteger = (int)(Math.random()*10_000_000);
-				String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<Integer> elementComponent = new ElementComponent<Integer>(generatedString,generatedInteger); 
 				generatedComponents.add(elementComponent);
 				elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -302,7 +281,7 @@ class ElementComponentComparatorTest {
 			// Get Double
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				double generatedDouble = Math.random()*10_000_000;
-				String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<Double> elementComponent = new ElementComponent<Double>(generatedString,generatedDouble); 
 				generatedComponents.add(elementComponent);
 				elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -311,7 +290,7 @@ class ElementComponentComparatorTest {
 			// Get String
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				String generatedStringInfo = "String Info";
-				String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<String> elementComponent = new ElementComponent<String>(generatedStringName,generatedStringInfo); 
 				generatedComponents.add(elementComponent);
 				elementComponentList.add(getRandomIndex(elementComponentList),elementComponent);
@@ -357,7 +336,7 @@ class ElementComponentComparatorTest {
 			// Get Integer
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				int generatedInteger = (int)(Math.random()*10_000_000);
-				String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<Integer> elementComponent = new ElementComponent<Integer>(generatedString,generatedInteger);
 				elementComponentList.add(elementComponent);
 			}
@@ -365,7 +344,7 @@ class ElementComponentComparatorTest {
 			// Get Double
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				double generatedDouble = Math.random()*10_000_000;
-				String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<Double> elementComponent = new ElementComponent<Double>(generatedString,generatedDouble);
 				elementComponentList.add(elementComponent);
 			}
@@ -373,7 +352,7 @@ class ElementComponentComparatorTest {
 			// Get String
 			for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 				String generatedStringInfo = "String Info";
-				String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+				String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 				ElementComponent<String> elementComponent = new ElementComponent<String>(generatedStringName,generatedStringInfo);
 				elementComponentList.add(elementComponent);
 			}
@@ -387,26 +366,26 @@ class ElementComponentComparatorTest {
 				case 0:
 					// Generate Int
 					int generatedInteger = (int)(Math.random()*10_000_000);
-					generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+					generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 					elementComponent = new ElementComponent<>(generatedString,generatedInteger);
 					elementComponentList.add(elementComponent);
 					break;
 				case 1:
 					// Generate Double
 					double generatedDouble = Math.random()*10_000_000;
-					generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+					generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 					elementComponent = new ElementComponent<>(generatedString,generatedDouble);
 					elementComponentList.add(elementComponent);
 				case 2:
 					// Generate String
 					String generatedStringInfo = "String Info";
-					String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+					String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 					elementComponent = new ElementComponent<>(generatedStringName,generatedStringInfo);
 					elementComponentList.add(elementComponent);
 				case 3:
 					// Generate ArrayList
 					ArrayList<?> generatedArrayList = new ArrayList<>();
-					generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+					generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 					elementComponent = new ElementComponent<>(generatedString,generatedArrayList);
 					elementComponentList.add(elementComponent);
 				}
@@ -439,7 +418,7 @@ class ElementComponentComparatorTest {
 		// Get Integer
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			int generatedInteger = (int)(Math.random()*10_000_000);
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedIntegers.add(generatedInteger);
 			elementComponentList.add(new ElementComponent<Integer>(generatedString,generatedInteger));
 		}
@@ -476,7 +455,7 @@ class ElementComponentComparatorTest {
 		// Get Double
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			double generatedDouble = Math.random()*10_000_000;
-			String generatedString = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedString = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedDoubles.add(generatedDouble);
 			elementComponentList.add(new ElementComponent<Double>(generatedString,generatedDouble));
 		}
@@ -514,8 +493,8 @@ class ElementComponentComparatorTest {
 
 		// Get String
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
-			String generatedStringInfo = generateRandomString(0, 20);
-			String generatedStringName = generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
+			String generatedStringInfo = JUnitHelper.generateRandomString(0, 20);
+			String generatedStringName = JUnitHelper.generateRandomString(NAME_MIN_LEN, NAME_MAX_LEN);
 			generatedInfo.add(generatedStringInfo);
 			elementComponentList.add(new ElementComponent<String>(generatedStringName,generatedStringInfo));
 		}
@@ -685,7 +664,7 @@ class ElementComponentComparatorTest {
 		
 		assertEquals(getElementComponentListRepresentation(nameBasedList),getElementComponentListRepresentation(swappedList),
 				"Failure - namedBasedList and swappedList before swap (by "+firstCompare+") are not the same");
-		toBeSwapped.setCompareType(secondCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(secondCompare);
 		createdDateBasedList.updateTime();
 		toBeSwapped.updateTime();
 
@@ -700,7 +679,7 @@ class ElementComponentComparatorTest {
 				"Failure - UsedList not Updated when added");
 
 		// Test Reverse
-		toBeSwapped.setCompareType(firstCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(firstCompare);
 		nameBasedList.updateTime();
 		toBeSwapped.updateTime();
 		ArrayList<String> originalNames = new ArrayList<>(), updatedNames = new ArrayList<>();
@@ -754,7 +733,7 @@ class ElementComponentComparatorTest {
 		
 		assertEquals(getElementComponentListRepresentation(nameBasedList),getElementComponentListRepresentation(swappedList),
 				"Failure - namedBasedList and swappedList before swap (by "+firstCompare+") are not the same");
-		toBeSwapped.setCompareType(secondCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(secondCompare);
 		modifiedBasedList.updateTime();
 		toBeSwapped.updateTime();
 
@@ -768,7 +747,7 @@ class ElementComponentComparatorTest {
 				"Failure - UsedList not Updated when added");
 
 		// Test Reverse
-		toBeSwapped.setCompareType(firstCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(firstCompare);
 		//printArrayListConcurrently(modifiedBasedList.getElementList(),swappedList.getElementList());
 		nameBasedList.updateTime();
 		toBeSwapped.updateTime();
@@ -807,7 +786,7 @@ class ElementComponentComparatorTest {
 		// Get Object
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			ElementComponent<Object> newElementComponent = generateRandomElementComponent();
-			newElementComponent.setElementName(generateRandomString(1,20));
+			newElementComponent.setElementName(JUnitHelper.generateRandomString(1,20));
 			nameBasedList.addElement(newElementComponent);
 			swappedList.addElement(newElementComponent);
 			idBasedList.addElement(newElementComponent);
@@ -815,7 +794,7 @@ class ElementComponentComparatorTest {
 				
 		assertEquals(getElementComponentListRepresentation(nameBasedList),getElementComponentListRepresentation(swappedList),
 				"Failure - namedBasedList and swappedList before swap (by "+firstCompare+") are not the same");
-		toBeSwapped.setCompareType(secondCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(secondCompare);
 		idBasedList.updateTime();
 		toBeSwapped.updateTime();
 
@@ -829,7 +808,7 @@ class ElementComponentComparatorTest {
 				"Failure - UsedList not Updated when added");
 
 		// Test Reverse
-		toBeSwapped.setCompareType(firstCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(firstCompare);
 		//printArrayListConcurrently(idBasedList.getElementList(),swappedList.getElementList());
 		nameBasedList.updateTime();
 		toBeSwapped.updateTime();
@@ -867,7 +846,7 @@ class ElementComponentComparatorTest {
 		// Get Object
 		for(int i = 0; i<GENERATION_COUNT_PER;i++) {
 			ElementComponent<Object> newElementComponent = generateRandomElementComponent();
-			newElementComponent.setElementName(generateRandomString(1,20));
+			newElementComponent.setElementName(JUnitHelper.generateRandomString(1,20));
 			nameBasedList.addElement(newElementComponent);
 			swappedList.addElement(newElementComponent);
 			infoBasedList.addElement(newElementComponent);
@@ -875,7 +854,7 @@ class ElementComponentComparatorTest {
 				
 		assertEquals(getElementComponentListRepresentation(nameBasedList),getElementComponentListRepresentation(swappedList),
 				"Failure - namedBasedList and swappedList before swap (by "+firstCompare+") are not the same");
-		toBeSwapped.setCompareType(secondCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(secondCompare);
 		infoBasedList.updateTime();
 		toBeSwapped.updateTime();
 
@@ -894,7 +873,7 @@ class ElementComponentComparatorTest {
 				"Failure - UsedList not Updated when added");
 
 		// Test Reverse
-		toBeSwapped.setCompareType(firstCompare);
+		toBeSwapped.getRuleList().get(0).setCompareType(firstCompare);
 		//printArrayListConcurrently(idBasedList.getElementList(),swappedList.getElementList());
 		nameBasedList.updateTime();
 		toBeSwapped.updateTime();

@@ -1,11 +1,12 @@
 package objectsorter.structure.temp.comparator;
 
 import objectsorter.structure.temp.Element;
-import objectsorter.structure.temp.ElementEnum.CompareType;
-import objectsorter.structure.temp.ElementEnum.OrderType;
+import objectsorter.structure.temp.comparator.comparerule.CompareRule.CompareType;
+import objectsorter.structure.temp.comparator.comparerule.CompareRule.OrderType;
 
-public class ElementComparator {
-	public static <T extends Element> int compare(T element1, T element2, CompareType compareType, OrderType orderType) throws Exception {
+public class ElementComparatorHelper {
+
+	public static <T extends Element> int compareElementRule(T element1, T element2, CompareType compareType, OrderType orderType) throws Exception {
 		if(element1==null && element2!=null)return 1;
 		if(element1==null && element2==null)return 0;
 		if(element1!=null && element2==null)return -1;

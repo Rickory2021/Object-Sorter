@@ -6,8 +6,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import objectsorter.structure.temp.*;
-import objectsorter.structure.temp.ElementEnum.ElementObjectCompareType;
 import objectsorter.structure.temp.comparator.*;
+import objectsorter.structure.temp.comparator.comparerule.CompareRule.OrderType;
+import objectsorter.structure.temp.comparator.comparerule.ElementComponentCompareRule.ElementComponentCompareType;
 
 
 public class refractorTest {
@@ -36,7 +37,7 @@ public class refractorTest {
 		//type.getIntegerRepresentation();
 		
 		ElementComponentComparator<ElementComponent<Integer>> eInfo = 
-				new ElementComponentComparator<ElementComponent<Integer>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
+				new ElementComponentComparator<ElementComponent<Integer>>(ElementComponentCompareType.INFO_COMPARISION);
 		Class<?>[] interfaceArr = eInfo.getClass().getInterfaces();
 		for(Class<?> cls:interfaceArr) {
 			System.out.println(cls.toString());
@@ -61,7 +62,7 @@ public class refractorTest {
 		System.out.println(tree);
 		System.out.println(tree.getElementList().get(0).getElementInfo().getElementList().get(0).getElementInfo().getClass());
 		ElementComponentComparator<ElementComponent<Integer>> infoComparator = 
-				new ElementComponentComparator<ElementComponent<Integer>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
+				new ElementComponentComparator<ElementComponent<Integer>>(ElementComponentCompareType.INFO_COMPARISION);
 		
 		ElementComponentList<?> tranverseNode1 = tree.getElementList().get(0).getElementInfo();
 		ElementComponentList<?> tranverseNode2 = tree.getElementList().get(1).getElementInfo();
@@ -98,13 +99,13 @@ public class refractorTest {
 		
 		System.out.println("ElementComponentComparator");
 		ElementComponentComparator<ElementComponent<Integer>> nameInfo = 
-				new ElementComponentComparator<ElementComponent<Integer>>(ElementEnum.ElementComponentCompareType.NAME);
+				new ElementComponentComparator<ElementComponent<Integer>>(ElementComponentCompareType.NAME);
 		ElementComponentComparator<ElementComponent<Integer>> intInfo = 
-				new ElementComponentComparator<ElementComponent<Integer>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
+				new ElementComponentComparator<ElementComponent<Integer>>(ElementComponentCompareType.INFO_COMPARISION);
 		ElementComponentComparator<ElementComponent<Double>> doubleInfo = 
-				new ElementComponentComparator<ElementComponent<Double>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
+				new ElementComponentComparator<ElementComponent<Double>>(ElementComponentCompareType.INFO_COMPARISION);
 		ElementComponentComparator<ElementComponent<String>> strInfo = 
-				new ElementComponentComparator<ElementComponent<String>>(ElementEnum.ElementComponentCompareType.INFO_COMPARISION);
+				new ElementComponentComparator<ElementComponent<String>>(ElementComponentCompareType.INFO_COMPARISION);
 		System.out.println(intInfo.compare(infoTest1, infoTest2));
 		System.out.println(doubleInfo.compare(infoTest4, infoTest3));
 		System.out.println(strInfo.compare(infoTest5, infoTest6));
@@ -112,7 +113,7 @@ public class refractorTest {
 		System.out.println(eInfo.compare(infoTest1, infoTest1));
 		
 		ElementComponentList<Integer> sortedInteger1 = new ElementComponentList<Integer>("Sorted Integer SingleObject 1");
-		sortedInteger1.setStructType(null);
+		sortedInteger1.setListStructure(null);
 		ElementComponentList<Integer> sortedInteger2 = new ElementComponentList<Integer>("Sorted Integer SingleObject 2");
 		sortedInteger1.setActiveComponentComparator(intInfo, false);
 		sortedInteger2.setActiveComponentComparator(intInfo, false);
@@ -129,12 +130,12 @@ public class refractorTest {
 		
 		System.out.println(sortedInteger1);
 		System.out.println(sortedInteger2);
-		intInfo.setOrderType(ElementEnum.OrderType.DESCENDING);
+		intInfo.getRuleList().get(0).setOrderType(OrderType.DESCENDING);
 		//sortedInteger.updateList();
 		System.out.println(sortedInteger1);
 		System.out.println(sortedInteger2);
-		intInfo.setCompareType(ElementEnum.ElementComponentCompareType.NAME);
-		intInfo.setOrderType(ElementEnum.OrderType.ASCENDING);
+		intInfo.getRuleList().get(0).setCompareType(ElementComponentCompareType.NAME);
+		intInfo.getRuleList().get(0).setOrderType(OrderType.ASCENDING);
 		System.out.println(sortedInteger1);
 		System.out.println(sortedInteger2);
 		

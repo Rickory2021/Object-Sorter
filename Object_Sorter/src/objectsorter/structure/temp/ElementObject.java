@@ -10,7 +10,7 @@ public class ElementObject extends Element{
 	 * 
 	 */
 	private static final long serialVersionUID = 4407672074280243099L;
-	private ElementEnum.StructureType structType;
+	private ListStructure structType;
 	// The Tree Structure
 	private ArrayList<ElementObject> objectList;
 	private ElementObjectComparator<ElementObject> activeObjectComparator;
@@ -23,7 +23,7 @@ public class ElementObject extends Element{
 	
 	public ElementObject() {
 		super();
-		this.structType = ElementEnum.StructureType.DUPLICATE;
+		this.structType = ListStructure.DUPLICATE;
 		this.objectList = new ArrayList<ElementObject>();
 		this.activeObjectComparator=new ElementObjectComparator<ElementObject>();
 		
@@ -44,11 +44,11 @@ public class ElementObject extends Element{
 		this.unknownList = new ElementComponentList<>();
 	}
 	
-	public ElementEnum.StructureType getStructType() {
+	public ListStructure getStructType() {
 		return structType;
 	}
 
-	public void setStructType(ElementEnum.StructureType structType) {
+	public void setStructType(ListStructure structType) {
 		this.structType = structType;
 	}
 	
