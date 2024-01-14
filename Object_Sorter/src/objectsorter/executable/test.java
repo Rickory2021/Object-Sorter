@@ -31,9 +31,10 @@ public class test {
 		//main1();
 		//main2();
 		//main3();
-		TeppanCafeTipReport();
+		TeppanCafeKwickTipReport();
+		//TeppanCafeToastExecute();
 	}
-	
+
 	public static void main1() {
 		System.out.println("/");
 		String text = "la conférence, commencera à 10 heures ?";
@@ -43,7 +44,7 @@ public class test {
 		System.out.println("☝🏻"+"☝🏻".matches("\\x{0001f91f}"));
 		// "[\\uD800-\\uDB7F][\\uDC00-\\uDFFF]";
 		String regexEmoji = "[\\x{00010000}-\\x{000EFFFF}]";
-		
+
 		String[] stringEmoji = new String[] {"😀","😂","🤟","☕","☝🏻"};
 		for(String str:stringEmoji) {
 			System.out.println(str+"\t"+str.matches(regexEmoji));
@@ -62,15 +63,15 @@ public class test {
 		for(String str:stringTest2) {
 			System.out.println(str+"\t|"+HtmlTag.clearArrowTagString(str)+"|");
 		}
-		
-		
-		
+
+
+
 		System.out.println((int)'\0');
 		System.out.println(">"+(char)(-1)+"<");
 		System.out.println(">"+(char)Integer.MAX_VALUE);
 		System.out.println((char)(-1)==(char)Integer.MAX_VALUE?"True":"False");
-		
-		
+
+
 		ArrayList<Integer> Test = new ArrayList<>();
 		Test.add(1);
 		Test.add(2);
@@ -78,7 +79,7 @@ public class test {
 		Test.remove(1);
 		Test.add(1,5);
 		System.out.println(Test);
-		
+
 		BufferedReader systemReader = new BufferedReader(new InputStreamReader(System.in));
 		String[] artistName = {"AAA", "AAAMYY", "Ado", "Aimer", "Amazarashi", "Anna", "Asako Toki", "Asca", "Ayuma Imazu",
 				"back number", "BBHF", "THE CHARM PARK", "Chippoke Ohashi", "Daoko", "Egoist", "Eill", "Eve", "FIVE NEW OLD", "flumpool",
@@ -97,25 +98,25 @@ public class test {
 					index = (int)(Math.random()*artistName.length);
 				active.add(index);
 				ElementObject object = new ElementObject();
-				
+
 				ArrayList<String> listInfo = new ArrayList<>();
 				listInfo.add("info1");
 				listInfo.add("info2");
 				ElementComponentInfo<ArrayList<String>> infocomp = new ElementComponentInfo<ArrayList<String>>(listInfo);
 				ElementComponent component0 = new ElementComponent("Info", infocomp);
 				object.addComponent(component0,ElementListQoL.UNIQUEFINAL);
-				
-				
+
+
 				ElementComponentInfoComparable<String> name = new ElementComponentInfoComparable<String>(artistName[index]);
 				System.out.println("Component:"+name.getClass());
 				ElementComponent component = new ElementComponent("Artist Name", artistName[index]);
-				
+
 				System.out.println("Artist:"+component.getcomponentInfo().getClass());
 				System.out.println(component.getcomponentInfo());
 				object.addComponent(component,ElementListQoL.DUPLICATENAMEUNSORTED);
 				System.out.println("ARTIST DONE");
-				
-				
+
+
 				/*System.out.println("Initial");
 				System.out.println(object);
 				System.out.println("1st");
@@ -133,30 +134,30 @@ public class test {
 				}	
 				ElementComponent component3 = new ElementComponent("Flag", flag);
 				object.addComponent(component3,ElementListQoL.DUPLICATENAMEUNSORTED);
-				
+
 				//System.out.println(object.getComponent("Score"));
 				//System.out.println("FINAL");
 				//System.out.println(object);
 				//Collections.sort(object.getComponentList());
 				list.add(object);
-				
+
 			}
-			
+
 			for(int i = 0;i<list.size();i++) {
 				System.out.println(list.get(i));
 			}
-			
+
 			System.out.println("\n\n\n\n\n\n\n");
-			
-			
+
+
 			ArrayList<ElementSorterPrecedenceType> orderOfPrecedence = new ArrayList<>();
-			
+
 			//orderOfPrecedence.add(new ElementSorterPrecedenceType("Artist Name", true));
 			ElementSorter byArtistName = new ElementSorter("byArtisy",orderOfPrecedence);
 			//Collections.sort(list, byArtistName);
 			//orderOfPrecedence.add(new ElementSorterPrecedenceType("Flag", false));
 			orderOfPrecedence.add(new ElementSorterPrecedenceType("Score", false));
-			
+
 			ElementSorter byScore = new ElementSorter("byScore",orderOfPrecedence);
 			Collections.sort(list, byScore);
 			for(int i = 0;i<list.size();i++) {
@@ -178,14 +179,14 @@ public class test {
 			 * Tag+Name
 			 * Tag+Tag+Tag
 			 */
-			
+
 			/*ArtistSorter artistSorter = new ArtistSorter();
 			//artistSorter.addPrecedence(new String[]{"Recent Date","Descending"});
 			artistSorter.addPrecedence(new String[]{"Flag-NEW","Descending"});
 			artistSorter.addPrecedence(new String[]{"Score","Descending"});
 			list.sort(artistSorter);
 
-			
+
 			SongSorter songSorter = new SongSorter();
 			// NEED TO TEST
 			// Name Score Flag
@@ -195,7 +196,7 @@ public class test {
 			for(int i = 0;i<list.size();i++) {
 				list.get(i).getSongs().sort(songSorter);
 			}
-			
+
 			PlacementSorter placeSorter = new PlacementSorter();
 			//placeSorter.addPrecedence(new String[] {"Place","Ascending"});
 			placeSorter.addPrecedence(new String[] {"Date", "Ascending"});
@@ -204,68 +205,68 @@ public class test {
 					list.get(i).getSongs().get(j).getPlacements().sort(placeSorter);
 				}			
 			}
-			
+
 			for(int i = 0;i<list.size();i++) {
 				System.out.println(list.get(i));
 			}*/
 			// Serialization
 			ElementObject object = list.get(list.size()-1);
 			String filename = "shubham.txt";
-			
-	        try {
-	        	
-	            // Saving of object in a file
-	            FileOutputStream file = new FileOutputStream
-	                                           (filename);
-	            ObjectOutputStream out = new ObjectOutputStream
-	                                           (file);
-	            System.out.println("WATS");
-	            // Method for serialization of object
-	            out.writeObject(object);
-	            out.close();
-	            file.close();
-	 
-	            System.out.println("Object has been serialized\n"
-	                              + "Data before Deserialization.");
-	            System.out.println(object);
-	        }
-	 
-	        catch (IOException ex) {
-	            System.out.println("IOException is caught1");
-	        }
-	 
-	        object = null;
-	 
-	        // Deserialization
-	        try {
-	 
-	            // Reading the object from a file
-	            FileInputStream file = new FileInputStream
-	                                         (filename);
-	            ObjectInputStream in = new ObjectInputStream
-	                                         (file);
-	 
-	            // Method for deserialization of object
-	            object = (ElementObject)in.readObject();
-	 
-	            in.close();
-	            file.close();
-	            System.out.println("Object has been deserialized\n"
-	                                + "Data after Deserialization.");
-	            System.out.println(object);
-	 
-	            // System.out.println("z = " + object1.z);
-	        }
-	 
-	        catch (IOException ex) {
-	            System.out.println("IOException is caught");
-	        }
-	 
-	        catch (ClassNotFoundException ex) {
-	            System.out.println("ClassNotFoundException" +
-	                                " is caught");
-	        }
-			
+
+			try {
+
+				// Saving of object in a file
+				FileOutputStream file = new FileOutputStream
+						(filename);
+				ObjectOutputStream out = new ObjectOutputStream
+						(file);
+				System.out.println("WATS");
+				// Method for serialization of object
+				out.writeObject(object);
+				out.close();
+				file.close();
+
+				System.out.println("Object has been serialized\n"
+						+ "Data before Deserialization.");
+				System.out.println(object);
+			}
+
+			catch (IOException ex) {
+				System.out.println("IOException is caught1");
+			}
+
+			object = null;
+
+			// Deserialization
+			try {
+
+				// Reading the object from a file
+				FileInputStream file = new FileInputStream
+						(filename);
+				ObjectInputStream in = new ObjectInputStream
+						(file);
+
+				// Method for deserialization of object
+				object = (ElementObject)in.readObject();
+
+				in.close();
+				file.close();
+				System.out.println("Object has been deserialized\n"
+						+ "Data after Deserialization.");
+				System.out.println(object);
+
+				// System.out.println("z = " + object1.z);
+			}
+
+			catch (IOException ex) {
+				System.out.println("IOException is caught");
+			}
+
+			catch (ClassNotFoundException ex) {
+				System.out.println("ClassNotFoundException" +
+						" is caught");
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -290,10 +291,10 @@ public class test {
 			}else {
 				System.out.print(String.format("%15s\t",searchedList.get(i).getComponent("text").getcomponentInfo()));
 			}
-			
+
 			if(i%16==15)System.out.println();
 		}*/
-		
+
 		//System.out.println(HTMLDOMParser.constructTable(searchedList, "text", 16));
 		System.out.println("TABLE STRING");
 		System.out.println(ElementListQoL.getTableString(HTMLDOMParser.constructTable(searchedList, "text", 16), 15));
@@ -308,24 +309,24 @@ public class test {
 			}
 		}
 	}
-	
+
 	public static void main3() {
 		CsvTableParser test1 = new CsvTableParser("Database");
 		test1.analyzeCsv("clockinReport.csv");
 		System.out.println(test1.getTable());
 		System.out.println(ElementListQoL.getTableString(test1.getTable(), 15));
 	}
-	
-	public static void TeppanCafeTipReport() {
+
+	public static void TeppanCafeKwickTipReport() {
 		ArrayList<ElementObject> employeeDailyTipReportList = new ArrayList<>();
 		// Front of House
 		String[] frontOfHouseArr = new String[] {"Ameena","Brianna","Casey","Danery","Jacob","Lexi","Isaiah"};
 		// Directory Path and File Name
-		String dailySalesDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Daily Sales Report",
-				clockInDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Clock In Report";
+		String dailySalesDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Kwick\\Daily Sales Report",
+				clockInDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Kwick\\Clock In Report";
 		File dailySalesDirectoryPath = new File(dailySalesDirectoryString);
 		File clockInDirectoryPath = new File(clockInDirectoryString);
-		
+
 		String dailySalesFileNameArr[] = dailySalesDirectoryPath.list();
 		String clockInFileNameArr[] = clockInDirectoryPath.list();
 		for(String arr:clockInFileNameArr) {
@@ -333,7 +334,7 @@ public class test {
 		}
 		ArrayList<ElementObject> dailySalesTableList = new ArrayList<>();
 		ArrayList<ElementObject> clockInTableList = new ArrayList<>();
-		
+
 		for(String dailySalesFileName : dailySalesFileNameArr) {
 			HTMLDOMParser htmlParser = new HTMLDOMParser(dailySalesDirectoryString);
 			htmlParser.analyzeHtml(dailySalesFileName);
@@ -346,7 +347,7 @@ public class test {
 				}else {
 					System.out.print(String.format("%15s\t",tableList.get(i).getComponent("text").getcomponentInfo()));
 				}
-				
+
 				if(i%16==15)System.out.println();
 			}*/
 			//System.out.println(tableList.size()/16.0);
@@ -363,7 +364,7 @@ public class test {
 			// Day Sales Report 2023-11-20	
 			dailySalesTableList.add(table);
 		}
-		
+
 		for(String clockInFileName : clockInFileNameArr) {
 			//System.out.println(clockInFileName);
 			CsvTableParser csvParser = new CsvTableParser(clockInDirectoryString);
@@ -386,12 +387,12 @@ public class test {
 			// Nov20
 			clockInTableList.add(table);
 		}
-		
+
 		for(ElementObject dailySalesTable: dailySalesTableList) {
 			//System.out.println(ElementListQoL.getTableString(dailySalesTable, 15));
 			//System.out.println(dailySalesTable);
 		}
-		
+
 		for(ElementObject clockInTable: clockInTableList) {
 			//System.out.println(ElementListQoL.getTableString(clockInTable, 15));
 		}
@@ -454,13 +455,13 @@ public class test {
 				}
 				//System.out.println("DONE");
 			}
-			
+
 			// We now have the tip List and Shift List, Now we have to Create Per Entity and get their hours+TIp
 			ArrayList<ElementObject> employeeList = new ArrayList<>();
 			//frontOfHouseArr
 			for(String frontOfHouseString: frontOfHouseArr) {
 				ElementObject employee = new ElementObject(frontOfHouseString);
-				employee.addComponent("Hours", "n/a", ElementListQoL.DUPLICATENAMEUNSORTED);
+				employee.addComponent("Hours", 0.0, ElementListQoL.DUPLICATENAMEUNSORTED);
 				employee.addComponent("Tip", 0.0, ElementListQoL.DUPLICATENAMEUNSORTED);
 				employee.addComponent("Hours Minutes", 0, ElementListQoL.DUPLICATENAMEUNSORTED);
 				//System.out.println(employee);
@@ -474,6 +475,7 @@ public class test {
 						int currentMinutes = (int)employee.getComponent("Hours Minutes").getcomponentInfo().getInfo();
 						int newMinutes = (int)shift.getComponent("Total Minutes").getcomponentInfo().getInfo();
 						employee.getComponent("Hours Minutes").setcomponentInfo(new ElementComponentInfo<Integer>(newMinutes+currentMinutes));
+						employee.getComponent("Hours").setcomponentInfo(new ElementComponentInfo<Double>((int)(employee.getComponent("Hours Minutes").getcomponentInfo().getInfo())/60.0));
 					}
 				}
 			}
@@ -516,17 +518,240 @@ public class test {
 				if((double)employee.getComponent("Tip").getcomponentInfo().getInfo()!=0.0) {
 					System.out.println(employee);
 				}
-				
+
 			}
 			System.out.println("\n\n");
 		}
 	}
-	
+
+	public static void TeppanCafeToastExecute() {
+		// Tip Execution
+		// Front of House
+		String[] frontOfHouseArr = new String[] {"Alexandria G","Ameena K","Brianna G","Casey W","Danery R","Isaiah L","Jacob R","Rachel H"};
+		// Directory Path and File Name
+		String orderDetailsDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Toast\\Order Details Report",
+				timeEntryDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Toast\\Time Entry Report",
+				discountDirectoryString = "C:\\Users\\ricky\\OneDrive\\Desktop\\Object Sorter Database\\Teppan Cafe\\Toast\\Discount Report";
+		File orderDetailsDirectoryPath = new File(orderDetailsDirectoryString);
+		File timeEntryDirectoryPath = new File(timeEntryDirectoryString);
+		File discountDirectoryPath = new File(discountDirectoryString);
+
+		String orderDetailsFileNameArr[] = orderDetailsDirectoryPath.list();
+		String timeEntryFileNameArr[] = timeEntryDirectoryPath.list();
+		String discountFileNameArr[] = discountDirectoryPath.list();
+		for(String arr:timeEntryFileNameArr) {
+			System.out.println(arr);
+		}
+
+		ArrayList<ElementObject> tippedOrderTableList = new ArrayList<>();
+		ArrayList<ElementObject> timeEntryFoHTableList = new ArrayList<>();
+
+		for(String tippedOrderFileName : orderDetailsFileNameArr) {
+			CsvTableParser csvParser = new CsvTableParser(orderDetailsDirectoryString);
+			csvParser.analyzeCsv(tippedOrderFileName);
+			ElementObject table = csvParser.getTable();
+			int openIndex = -1, tipIndex = -1;
+			// get Indexies
+			ElementObject row = table.getObjectList().get(0);
+			ArrayList<ElementComponent> componentList = row.getComponentList();
+			for(int i = 0; i<componentList.size();i++) {
+				if(componentList.get(i).getComponentName().trim().equals("Opened"))openIndex=i;
+				if(componentList.get(i).getComponentName().trim().equals("Tip"))tipIndex=i;
+			}
+
+			ArrayList<String> activeStringName = new ArrayList<>();
+			for(int i = 1; i<table.getObjectList().size();i++) {
+				row = table.getObjectList().get(i);
+				// [0] Date [1] Time [2] AM/PM
+				String[] openInfoArr = ((String)row.getComponentList().get(openIndex).getcomponentInfo().getInfo()).trim().split(" ");
+				String tipInfoArr = ((String)row.getComponentList().get(tipIndex).getcomponentInfo().getInfo()).trim();
+				int tableIndex = activeStringName.indexOf(openInfoArr[0]);
+				if(tableIndex==-1) {
+					// Create Table
+					ElementObject newTable = new ElementObject(openInfoArr[0]);
+					activeStringName.add(openInfoArr[0]);
+					tippedOrderTableList.add(newTable);
+					tableIndex=tippedOrderTableList.size()-1;
+				}
+				ElementObject dataRow = new ElementObject(openInfoArr[1]+" "+openInfoArr[2]);
+				dataRow.addComponent("Time", openInfoArr[1]+" "+openInfoArr[2],ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("Tip", (double)Double.parseDouble(tipInfoArr),ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("Time Minutes", (int)toMinutes(openInfoArr[1],openInfoArr[2]),ElementListQoL.DUPLICATENAMEUNSORTED);
+				if((double)dataRow.getComponent("Tip").getcomponentInfo().getInfo()!=0.0)
+					tippedOrderTableList.get(tableIndex).addObject(dataRow, ElementListQoL.DUPLICATENAMEUNSORTED);
+			}
+		}
+
+		for(String timeEntryFoHFileName : timeEntryFileNameArr) {
+			//System.out.println(timeEntryFoHFileName);
+			CsvTableParser csvParser = new CsvTableParser(timeEntryDirectoryString);
+			csvParser.analyzeCsv(timeEntryFoHFileName);
+			ElementObject table = csvParser.getTable();
+			int employeeIndex = -1, inDateIndex = -1, outDateIndex=-1;
+			// get Indexies
+			ElementObject row = table.getObjectList().get(0);
+			ArrayList<ElementComponent> componentList = row.getComponentList();
+			for(int i = 0; i<componentList.size();i++) {
+				if(componentList.get(i).getComponentName().trim().equals("Employee"))employeeIndex=i;
+				if(componentList.get(i).getComponentName().trim().equals("In Date"))inDateIndex=i;
+				if(componentList.get(i).getComponentName().trim().equals("Out Date"))outDateIndex=i;
+			}
+
+			ArrayList<String> activeStringName = new ArrayList<>();
+			for(int i = 1; i<table.getObjectList().size();i++) {
+				row = table.getObjectList().get(i);
+				// [0] Date [1] Time [2] AM/PM
+				String[] employeeArr = ((String)row.getComponentList().get(employeeIndex).getcomponentInfo().getInfo()).trim().split(",");
+				String[] inDateInfoArr = ((String)row.getComponentList().get(inDateIndex).getcomponentInfo().getInfo()).trim().split(" ");
+				String[] outDateInfoArr = ((String)row.getComponentList().get(outDateIndex).getcomponentInfo().getInfo()).trim().split(" ");
+				String employeeName = removeQuotes(employeeArr[1]).trim()+" "+removeQuotes(employeeArr[0]).trim();
+
+				int tableIndex = activeStringName.indexOf(inDateInfoArr[0]);
+				if(tableIndex==-1) {
+					// Create Table
+					ElementObject newTable = new ElementObject(inDateInfoArr[0]);
+					activeStringName.add(inDateInfoArr[0]);
+					timeEntryFoHTableList.add(newTable);
+					tableIndex=timeEntryFoHTableList.size()-1;
+				}
+				ElementObject dataRow = new ElementObject(inDateInfoArr[1]+" "+inDateInfoArr[2]);
+				dataRow.addComponent("Employee", employeeName, ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("In Date", inDateInfoArr[1]+" "+inDateInfoArr[2],ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("Out Date",outDateInfoArr[1]+" "+outDateInfoArr[2],ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("In Date Minutes", (int)toMinutes(inDateInfoArr[1],inDateInfoArr[2]),ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("Out Date Minutes", (int)toMinutes(outDateInfoArr[1],outDateInfoArr[2]),ElementListQoL.DUPLICATENAMEUNSORTED);
+				dataRow.addComponent("Total Minutes", (int)dataRow.getComponent("Out Date Minutes").getcomponentInfo().getInfo()
+						-(int)dataRow.getComponent("In Date Minutes").getcomponentInfo().getInfo(),ElementListQoL.DUPLICATENAMEUNSORTED);
+				boolean isFoH = false;
+				for(String name :frontOfHouseArr) {
+					if(dataRow.getComponent("Employee").getcomponentInfo().getInfo().toString().equals(name)) {
+						isFoH=true;
+						break;
+					}
+				}
+				
+				if(isFoH)timeEntryFoHTableList.get(tableIndex).addObject(dataRow, ElementListQoL.DUPLICATENAMEUNSORTED);
+			}
+		}
+
+		for(ElementObject tippedOrderTable: tippedOrderTableList) {
+			//System.out.println(ElementListQoL.getTableString(tippedOrderTable, 15));
+			//System.out.println(tippedOrderTable);
+		}
+
+		for(ElementObject timeEntryFoHTable: timeEntryFoHTableList) {
+			//System.out.println(ElementListQoL.getTableString(timeEntryFoHTable, 15));
+		}
+
+		ArrayList<ElementObject> employeeDailyTipReportList = new ArrayList<>();
+		for(int tableIndex = 0; tableIndex<tippedOrderTableList.size(); tableIndex++) {
+			ElementObject tippedOrders = tippedOrderTableList.get(tableIndex), 
+					timeEntryFoH = timeEntryFoHTableList.get(tableIndex);
+			String dateString = tippedOrders.getObjectName();
+			
+			//System.out.println(tippedOrders);
+			//System.out.println(timeEntryFoH);
+
+			// We now have the tip List(tippedOrder) and Shift List(timeEntryFoH), Now we have to Create Per Entity and get their hours+TIp
+			ArrayList<ElementObject> employeeList = new ArrayList<>();
+			//frontOfHouseArr
+			for(String frontOfHouseString: frontOfHouseArr) {
+				ElementObject employee = new ElementObject(frontOfHouseString);
+				employee.addComponent("Tip", 0.0, ElementListQoL.DUPLICATENAMEUNSORTED);
+				employee.addComponent("Hours in Minutes", 0, ElementListQoL.DUPLICATENAMEUNSORTED);
+				//System.out.println(employee);
+				employeeList.add(employee);
+			}
+
+			// Consolidate Hours of Work
+			for(ElementObject shift: timeEntryFoH.getObjectList()) {
+				String employeeString = shift.getComponent("Employee").getcomponentInfo().toString();
+				for(ElementObject employee : employeeList) {
+					if(employee.getObjectName().equals(employeeString)) {
+						int currentMinutes = (int)employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo();
+						int newMinutes = (int)shift.getComponent("Total Minutes").getcomponentInfo().getInfo();
+						employee.getComponent("Hours in Minutes").setcomponentInfo(new ElementComponentInfo<Integer>(newMinutes+currentMinutes));
+					}
+				}
+			}
+			
+			// Adding the Tips
+			ArrayList<ElementObject> activeEmployee = new ArrayList<>();
+			for(ElementObject order: tippedOrders.getObjectList()) {
+				//System.out.println(order);
+				double tip = (double)order.getComponent("Tip").getcomponentInfo().getInfo();
+				int minuteTime = (int)order.getComponent("Time Minutes").getcomponentInfo().getInfo();
+				for(ElementObject shift: timeEntryFoH.getObjectList()) {
+					//System.out.println(shift);
+					if((int)shift.getComponent("In Date Minutes").getcomponentInfo().getInfo()<=minuteTime && 
+							(int)shift.getComponent("Out Date Minutes").getcomponentInfo().getInfo()>minuteTime) {
+						// Worked During that time
+						String employeeString = shift.getComponent("Employee").getcomponentInfo().toString();
+						for(ElementObject employee:employeeList) {
+							//System.out.println(employee.getObjectName()+"=="+employeeString);
+							if(employee.getObjectName().equals(employeeString)) {
+								activeEmployee.add(employee);
+							}
+						}
+					}
+				}
+				// Add and Divide Evenly
+				System.out.println("Origin Tip: "+ tip + "\tSplit by: "+activeEmployee.size());
+				System.out.println("Time: "+order.getComponent("Time").getcomponentInfo()+"\tORDER TIME: "+minuteTime);
+				for(ElementObject emp: activeEmployee) {
+					System.out.println(emp);
+				}
+				System.out.println("\n");
+				tip/=activeEmployee.size();
+				for(ElementObject employee:activeEmployee) {
+					double currentTip = (double)employee.getComponent("Tip").getcomponentInfo().getInfo();
+					//System.out.println(currentTip + "+"+ tip);
+					employee.getComponent("Tip").setcomponentInfo(new ElementComponentInfo<Double>(currentTip+tip));
+					//System.out.println(employee.getComponent("Tip"));
+				}
+				activeEmployee.clear();
+			}
+			System.out.println(dateString);
+			for(ElementObject employee:employeeList) {
+				//System.out.println(employee);
+				if((double)employee.getComponent("Tip").getcomponentInfo().getInfo()!=0.0) {
+					System.out.println(employee.getObjectName());
+					System.out.println("Tip");
+					System.out.println(employee.getComponent("Tip").getcomponentInfo().getInfo());
+					System.out.println("Hour in Minutes : "+employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo());
+					System.out.println(((int)employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo())/60.0);
+					System.out.println("\n");
+					//System.out.println(employee);
+				}
+
+			}
+			System.out.println("\n\n");
+
+		}
+	}
+
 	public static int toMinutes (String militaryTime) {
 		int minutes = 0;
 		String[] splitted = militaryTime.trim().split(":");
 		minutes+= Integer.parseInt(splitted[0])*60+Integer.parseInt(splitted[1]);
 		return minutes;
+	}
+
+	public static int toMinutes(String hourMin, String postfix) {
+		String[] hourMinStr = hourMin.trim().split(":");
+		if(postfix.toLowerCase().trim().equals("pm")) {
+			if(!hourMinStr[0].equals("12"))hourMinStr[0] = Integer.parseInt(hourMinStr[0])+12+"";
+			
+		}
+		return toMinutes(hourMinStr[0]+":"+hourMinStr[1]);
+	}
+
+	public static String removeQuotes(String string) {
+		char[] quote = new char[]{'\"'};
+		for(char character:quote) {
+			string=string.replace(String.valueOf(character), "");
+		}
+		return string;
 	}
 
 }
