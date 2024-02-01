@@ -31,8 +31,8 @@ public class test {
 		//main1();
 		//main2();
 		//main3();
-		TeppanCafeKwickTipReport();
-		//TeppanCafeToastExecute();
+		//TeppanCafeKwickTipReport();
+		TeppanCafeToastExecute();
 	}
 
 	public static void main1() {
@@ -696,12 +696,12 @@ public class test {
 					}
 				}
 				// Add and Divide Evenly
-				System.out.println("Origin Tip: "+ tip + "\tSplit by: "+activeEmployee.size());
-				System.out.println("Time: "+order.getComponent("Time").getcomponentInfo()+"\tORDER TIME: "+minuteTime);
+				//System.out.println("Origin Tip: "+ tip + "\tSplit by: "+activeEmployee.size());
+				//System.out.println("Time: "+order.getComponent("Time").getcomponentInfo()+"\tORDER TIME: "+minuteTime);
 				for(ElementObject emp: activeEmployee) {
-					System.out.println(emp);
+					//System.out.println(emp);
 				}
-				System.out.println("\n");
+				//System.out.println("\n");
 				tip/=activeEmployee.size();
 				for(ElementObject employee:activeEmployee) {
 					double currentTip = (double)employee.getComponent("Tip").getcomponentInfo().getInfo();
@@ -719,7 +719,7 @@ public class test {
 					System.out.println("Tip");
 					System.out.println(employee.getComponent("Tip").getcomponentInfo().getInfo());
 					System.out.println("Hour in Minutes : "+employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo());
-					System.out.println(((int)employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo())/60.0);
+					System.out.println((((int)employee.getComponent("Hours in Minutes").getcomponentInfo().getInfo())/60.0)+"\t"+employee.getComponent("Tip").getcomponentInfo().getInfo());
 					System.out.println("\n");
 					//System.out.println(employee);
 				}
